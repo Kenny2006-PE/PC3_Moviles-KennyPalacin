@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.palacin.kenny.laboratoriocalificado03.databinding.ItemTeacherBinding
 import com.palacin.kenny.laboratoriocalificado03.model.Teacher
@@ -25,12 +23,10 @@ class TeacherAdapter(
             binding.textName.text = teacher.name
             binding.textLastName.text = teacher.lastName
 
-            // Usar Glide para cargar la imagen desde la URL
             Glide.with(context)
-                .load(teacher.imageUrl)  // Cargar la imagen desde la URL
-                .into(binding.imageTeacher)  // Colocarla en la ImageView
+                .load(teacher.imageUrl)
+                .into(binding.imageTeacher)
 
-            // Click simple: Llamar al número
             binding.root.setOnClickListener {
                 val intent = Intent(Intent.ACTION_DIAL).apply {
                     data = Uri.parse("tel:${teacher.phoneNumber}")
@@ -38,7 +34,6 @@ class TeacherAdapter(
                 context.startActivity(intent)
             }
 
-            // Click largo: Enviar correo
             binding.root.setOnLongClickListener {
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:${teacher.email}")
